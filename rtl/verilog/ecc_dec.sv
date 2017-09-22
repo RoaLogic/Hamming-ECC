@@ -1,46 +1,74 @@
-/////////////////////////////////////////////////////////////////
-//                                                             //
-//    ██████╗  ██████╗  █████╗                                 //
-//    ██╔══██╗██╔═══██╗██╔══██╗                                //
-//    ██████╔╝██║   ██║███████║                                //
-//    ██╔══██╗██║   ██║██╔══██║                                //
-//    ██║  ██║╚██████╔╝██║  ██║                                //
-//    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝                                //
-//          ██╗      ██████╗  ██████╗ ██╗ ██████╗              //
-//          ██║     ██╔═══██╗██╔════╝ ██║██╔════╝              //
-//          ██║     ██║   ██║██║  ███╗██║██║                   //
-//          ██║     ██║   ██║██║   ██║██║██║                   //
-//          ███████╗╚██████╔╝╚██████╔╝██║╚██████╗              //
-//          ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝ ╚═════╝              //
-//                                                             //
-//    Memory ECC denoder                                       //
-//    Parameterized Extended Hamming Code Decoder              //
-//                                                             //
-/////////////////////////////////////////////////////////////////
-//                                                             //
-//    Copyright (C) 2014-2017 ROA Logic BV                     //
-//    www.roalogic.com                                         //
-//                                                             //
-//   This source file may be used and distributed without      //
-// restriction provided that this copyright statement is not   //
-// removed from the file and that any derivative work contains //
-// the original copyright notice and the associated disclaimer.//
-//                                                             //
-//     THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY     //
-// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED   //
-// TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS   //
-// FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE AUTHOR      //
-// OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,         //
-// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES    //
-// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE   //
-// GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR        //
-// BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF  //
-// LIABILITY, WHETHER IN  CONTRACT, STRICT LIABILITY, OR TORT  //
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  //
-// OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE         //
-// POSSIBILITY OF SUCH DAMAGE.                                 //
-//                                                             //
-/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+//   ,------.                    ,--.                ,--.          //
+//   |  .--. ' ,---.  ,--,--.    |  |    ,---. ,---. `--' ,---.    //
+//   |  '--'.'| .-. |' ,-.  |    |  |   | .-. | .-. |,--.| .--'    //
+//   |  |\  \ ' '-' '\ '-'  |    |  '--.' '-' ' '-' ||  |\ `--.    //
+//   `--' '--' `---'  `--`--'    `-----' `---' `-   /`--' `---'    //
+//                                             `---'               //
+//   Error Correction and Detection Decoder                        //
+//   Parameterized Extended Hamming Code Decoder                   //
+//                                                                 //
+/////////////////////////////////////////////////////////////////////
+//                                                                 //
+//             Copyright (C) 2017 ROA Logic BV                     //
+//             www.roalogic.com                                    //
+//                                                                 //
+//   This source file may be used and distributed without          //
+//   restriction provided that this copyright statement is not     //
+//   removed from the file and that any derivative work contains   //
+//   the original copyright notice and the associated disclaimer.  //
+//                                                                 //
+//      THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY        //
+//   EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED     //
+//   TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS     //
+//   FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE AUTHOR OR     //
+//   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,  //
+//   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT  //
+//   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;  //
+//   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)      //
+//   HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN     //
+//   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR  //
+//   OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS          //
+//   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  //
+//                                                                 //
+/////////////////////////////////////////////////////////////////////
+
+// +FHDR -  Semiconductor Reuse Standard File Header Section  -------
+// FILE NAME      : ecc_dec.sv
+// DEPARTMENT     :
+// AUTHOR         : rherveille
+// AUTHOR'S EMAIL :
+// ------------------------------------------------------------------
+// RELEASE HISTORY
+// VERSION DATE        AUTHOR      DESCRIPTION
+// 1.0     2017-04-07  rherveille  initial release
+// ------------------------------------------------------------------
+// KEYWORDS : HAMMING ERROR CORRECTION DECODER                 
+// ------------------------------------------------------------------
+// PURPOSE  : Decodes Data and ECC bits from incoming data
+//            Detects and corrects bit errors
+// ------------------------------------------------------------------
+// PARAMETERS
+//  PARAM NAME        RANGE  DESCRIPTION              DEFAULT UNITS
+//  K                 1+     Information vector size  8
+//  LATENCY           0,1,2  0: No latency            0
+//                           1: Registered outputs
+//                           2: Registered inputs/outputs
+//  P0_LSB            0,1    0: p0 located at MSB     1
+//                           1: p0 located at LSB
+// ------------------------------------------------------------------
+// REUSE ISSUES 
+//   Reset Strategy      : external asynchronous active low; rst_ni
+//   Clock Domains       : 1, clk_i, rising edge
+//   Critical Timing     :
+//   Test Features       : na
+//   Asynchronous I/F    : no
+//   Scan Methodology    : na
+//   Instantiations      : none
+//   Synthesizable (y/n) : Yes
+//   Other               :                                         
+// -FHDR-------------------------------------------------------------
+
 
 //-----------------------------------------------------------------------------
 // Hamming codes can detect and correct a single bit error.
@@ -81,7 +109,7 @@ module ecc_dec #(
 )
 (
   //clock/reset ports (if LATENCY > 0)
-  input              rstn_i,     //asynchronous reset
+  input              rst_ni,     //asynchronous reset
   input              clk_i,      //clock input
   input              clkena_i,   //clock enable input
 
@@ -234,8 +262,8 @@ assign syndrome = calculate_syndrome(d);
 generate
   if (LATENCY > 1)
   begin
-      always @(posedge clk_i or negedge rstn_i)
-        if (!rstn_i)
+      always @(posedge clk_i or negedge rst_ni)
+        if (!rst_ni)
         begin
             d_reg        <= {n+1{1'b0}};
             parity_reg   <= 1'b0;
@@ -271,8 +299,8 @@ assign sb_fix =  parity_reg & |information_error(syndrome_reg);
 generate
   if (LATENCY > 0) //
   begin //Generate output registers
-      always @(posedge clk_i or negedge rstn_i)
-        if (!rstn_i)
+      always @(posedge clk_i or negedge rst_ni)
+        if (!rst_ni)
         begin
             q_o        <= {K{1'b0}};
             syndrome_o <= {m+1{1'b0}};
