@@ -182,10 +182,11 @@ function [K-1:0] extract_q;
   integer bit_idx, cw_idx;
 begin
     //This function extracts the information bits vector from the codeword
+    //information bits are stored in non-power-of-2 locations
 
     bit_idx=0; //information bit vector index
     for (cw_idx=1; cw_idx<=n; cw_idx++) //codeword index
-      if (2**$clog2(cw_idx-1) != cw_idx)
+      if (2**$clog2(cw_idx) != cw_idx)
         extract_q[bit_idx++] = cw[cw_idx];
 end
 endfunction //extract_q
