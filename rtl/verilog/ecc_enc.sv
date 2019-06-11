@@ -132,13 +132,14 @@ function [n:1] store_dbits_in_codeword;
   integer bit_idx, cw_idx;
 begin
     //This function puts the information bits vector in the correct location
+    //Information bits are stored in non-power-of-2 locations
 
     //clear all bits
     store_dbits_in_codeword = 0;
 
     bit_idx=0; //information vector bit index
     for (cw_idx=1; cw_idx<=n; cw_idx++)
-      if (2**$clog2(cw_idx-1) != cw_idx)
+      if (2**$clog2(cw_idx) != cw_idx)
         store_dbits_in_codeword[cw_idx] = d[bit_idx++];
 end
 endfunction //store_dbits_in_codeword
