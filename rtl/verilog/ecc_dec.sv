@@ -214,7 +214,7 @@ begin
     //then check result
     information_error = |tmp;
 end
-endfunction //information_vector_fixed;
+endfunction //information_error
 
 
 //---------------------------------------------------------
