@@ -208,7 +208,7 @@ begin
     tmp = 0;
     for (i=1; i<n; i++)
     begin
-       if ( (i == syndrome) && (i != 2**$clog2(i-1)) ) tmp[i] = 1'b1;
+         if ( (i == syndrome) && ((i & (i-1) != 0)) ) tmp[i] = 1'b1;
     end
 
     //then check result
