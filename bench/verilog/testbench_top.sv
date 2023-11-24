@@ -376,12 +376,12 @@ module testbench_top;
 
       welcome_msg();
       tst_clean_seq(K);
-      tst_clean_rnd(RUNS);
+      tst_clean_rnd(RUNS *K);
       tst_1bflip_seq(n);
-      tst_1bflip_rnd(RUNS, n);
+      tst_1bflip_rnd(RUNS *K, n);
       tst_2bflip_seq(n+1);
-      tst_2bflip_rnd(RUNS, n);
-      tst_rnd(RUNS,n);
+      tst_2bflip_rnd(RUNS *K, n);
+      tst_rnd(RUNS *K,n);
       goodbye_msg();
       
       $finish();
