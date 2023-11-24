@@ -159,7 +159,6 @@ module ecc_tb_checker #(
 //                        $display ("sb_err not asserted on P0 bit flip: GOOD");
                         good++;
                     end
-
                end
                else if (!sb_err_i)
                begin
@@ -179,12 +178,24 @@ module ecc_tb_checker #(
 
                //parity bits are on power of 2, should never assert sb_fix
 	       if (sb_fix_i)
-                 if (is_power_of_2( P0_LSB ? flip1_i +2 : flip1_i +1 ))
-                 begin
-                     $display ("sb_fix asserted on parity bit (flipped bit%0d): WRONG", flip1_i);
-                     bad++; ugly++;
-                 end
-                 else good++;
+               begin
+                   if (is_power_of_2( P0_LSB ? flip1_i : flip1_i +1 ))
+                   begin
+                       $display ("sb_fix asserted on parity bit (flipped bit%0d): WRONG", flip1_i);
+                       bad++; ugly++;
+                   end
+                   else good++;
+               end
+               else
+               begin
+
+                   if (!is_power_of_2( P0_LSB ? flip1_i : flip1_i +1 ) && (flip1_i != P0_LOCATION))
+                   begin
+                       $display ("sb_fix not asserted on data bit (flipped bit%0d): WRONG", flip1_i);
+                       bad++; ugly++;
+                   end
+                   else good++;
+               end
            end
 
         2: begin
