@@ -34,7 +34,7 @@
 
 all: regression
 
-sim        = msim_waves
+sim        = msim
 
 SIMULATORS = msim ncsim vcs riviera
 LINTERS    = $(addsuffix _lint, $(SIMULATORS))
