@@ -49,10 +49,13 @@ SIM_OPTS=-c +notimingchecks
 
 LOG = $(TOP).log
 
+#-voptargs=+acc should not be used here.
+#However the simulation fails for some parameter combinations without the it (why?)
 sim: vlog
 	echo "--- Running sim"
 	vsim $(SIM_OPTS)							\
 	  -l $(LOG) $(TOP)							\
+	  -voptargs=+acc							\
 	  -do "run -all; quit"							\
 	  $(foreach p, $(PARAMS),-g`echo $p | sed -r 's/(\w+)=([^0-9].*)/\1="\2"/'`)
 
@@ -66,7 +69,7 @@ simw: vlog
 	$(foreach p, $(PARAMS),-g`echo $p | sed -r 's/(\w+)=([^0-9].*)/\1="\2"/'`)
 	
 clean:
-	@rm -rf work *.log *.wlf
+	@rm -rf work log
 
 
 
