@@ -127,9 +127,7 @@ module ecc_dec #(
 //---------------------------------------------------------
 // Functions
 //---------------------------------------------------------
-function integer calculate_m;
-  input integer k;
-
+function integer calculate_m(input integer k);
   integer m;
 begin
   m=1;
@@ -140,9 +138,7 @@ end
 endfunction //calculate_m
 
 
-function [m:1] calculate_syndrome;
-  input [n:0] cw;
-
+function [m:1] calculate_syndrome(input [n:0] cw);
   integer p_idx, cw_idx;
 begin
     //clear syndrome
@@ -155,10 +151,7 @@ end
 endfunction //calculate_syndrome
 
 
-function [n:0] correct_codeword;
-  input [n:0] cw;
-  input [m:1] syndrome;
-begin
+function [n:0] correct_codeword(input [n:0] cw, input [m:1] syndrome);
     /*
       Correct all bits, including parity bits and extended parity bit.
       This simplifies this section and keeps the logic simple.
@@ -172,13 +165,10 @@ begin
 
     //then invert bit indicated by syndrome
     correct_codeword[syndrome] = ~correct_codeword[syndrome];
-end
 endfunction //correct_codeword
 
 
-function [K-1:0] extract_q;
-  input [n:0] cw;
-
+function [K-1:0] extract_q(input [n:0] cw);
   integer bit_idx, cw_idx;
 begin
     //This function extracts the information bits vector from the codeword
@@ -192,27 +182,15 @@ end
 endfunction //extract_q
 
 
-function information_error;
-  input [m:1] syndrome;
+function is_power_of_2(input int n);
+    is_power_of_2 = (n & (n-1)) == 0;
+endfunction
 
-  integer i;
-  reg   [n:0] tmp;
+
+function information_error(input [m:1] syndrome);
 begin
-    /*
-      This function checks if an error was detected/corrected in the information bits
- 
-      information_error = |syndrome & (syndrome != 2**clog2(syndrome-1));
-    */
-
-    //check for each information bit if it was in error
-    tmp = 0;
-    for (i=1; i<n; i++)
-    begin
-         if ( (i == syndrome) && ((i & (i-1) != 0)) ) tmp[i] = 1'b1;
-    end
-
-    //then check result
-    information_error = |tmp;
+    //This function checks if an error was detected/corrected in the information bits
+    information_error = |syndrome & !is_power_of_2(syndrome);
 end
 endfunction //information_error
 
