@@ -322,7 +322,7 @@ module testbench_top;
 
 
   //delay data; same delay as channel
-  always @(posedge clk) ch_enc_d <= enc_d;
+	always @(negedge clk) ch_enc_d <= enc_d;
 
 
   //instantiate decoder
