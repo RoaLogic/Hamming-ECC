@@ -270,7 +270,7 @@ assign cw_fixed = correct_codeword(d_reg, syndrome_reg);
 assign q = extract_q(cw_fixed);
 
 //Step 7: Generate status flags
-assign sb_err =  parity_reg & |syndrome_reg;
+assign sb_err = (parity_reg & |syndrome_reg) || (parity_reg & syndrome_reg == 0); // include error when the overall parity bit itself is wrong
 assign db_err = ~parity_reg & |syndrome_reg;
 assign sb_fix =  parity_reg & |information_error(syndrome_reg);
 
