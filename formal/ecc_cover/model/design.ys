@@ -1,0 +1,13 @@
+# running in ecc_cover/src/
+read -formal ecc_formal.v
+read -formal ecc_enc.sv
+read -formal ecc_dec.sv
+
+hierarchy -top ecc_formal -chparam K 64
+
+
+prep -top ecc_formal
+
+hierarchy -smtcheck
+write_jny -no-connections ../model/design.json
+write_rtlil ../model/design.il

@@ -1,0 +1,8 @@
+# running in ecc_prf_8/model/
+read_ilang design_prep.il
+hierarchy -smtcheck
+delete */t:$print
+formalff -assume
+dffunmap
+stat
+write_smt2 -wires design_smt2.smt2

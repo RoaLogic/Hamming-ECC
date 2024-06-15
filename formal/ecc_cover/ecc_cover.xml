@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+<testsuite timestamp="2024-06-15T15:48:57" hostname="angelo-Aspire-A315-44P" package="ecc" id="0" name="cover" tests="9" errors="0" failures="0" time="12" skipped="8">
+<properties>
+<property name="os" value="Linux"/>
+<property name="expect" value="PASS"/>
+<property name="status" value="PASS"/>
+</properties>
+<testcase classname="cover" name="build execution" time="0">
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:84.17-84.39" time="0" type="ASSERT" location="ecc_formal.v:84.17-84.39" id="$assert$ecc_formal.v:84$79">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:85.17-85.34" time="0" type="ASSERT" location="ecc_formal.v:85.17-85.34" id="$assert$ecc_formal.v:85$81">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:86.17-86.34" time="0" type="ASSERT" location="ecc_formal.v:86.17-86.34" id="$assert$ecc_formal.v:86$83">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:90.17-90.39" time="0" type="ASSERT" location="ecc_formal.v:90.17-90.39" id="$assert$ecc_formal.v:90$86">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:91.17-91.33" time="0" type="ASSERT" location="ecc_formal.v:91.17-91.33" id="$assert$ecc_formal.v:91$88">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:92.17-92.34" time="0" type="ASSERT" location="ecc_formal.v:92.17-92.34" id="$assert$ecc_formal.v:92$89">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:96.17-96.34" time="0" type="ASSERT" location="ecc_formal.v:96.17-96.34" id="$assert$ecc_formal.v:96$92">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in ecc_formal at ecc_formal.v:97.17-97.33" time="0" type="ASSERT" location="ecc_formal.v:97.17-97.33" id="$assert$ecc_formal.v:97$94">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property COVER in ecc_formal at ecc_formal.v:105.13-105.37" time="0" type="COVER" location="ecc_formal.v:105.13-105.37" id="$cover$ecc_formal.v:105$99" tracefile="engine_0/trace0.vcd">
+</testcase>
+<system-out>SBY 15:48:53 [ecc_prf_8] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_8'.
+SBY 15:48:53 [ecc_prf_16] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_16'.
+SBY 15:48:53 [ecc_prf_32] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_32'.
+SBY 15:48:53 [ecc_prf_64] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_64'.
+SBY 15:48:53 [ecc_cover] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_cover'.
+SBY 15:48:53 [ecc_cover] Copy '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_formal.v' to '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_cover/src/ecc_formal.v'.
+SBY 15:48:53 [ecc_cover] Copy '/home/ajacobo/Videos/Hamming-ECC/rtl/verilog/ecc_enc.sv' to '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_cover/src/ecc_enc.sv'.
+SBY 15:48:53 [ecc_cover] Copy '/home/ajacobo/Videos/Hamming-ECC/rtl/verilog/ecc_dec.sv' to '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_cover/src/ecc_dec.sv'.
+SBY 15:48:53 [ecc_cover] engine_0: smtbmc
+SBY 15:48:53 [ecc_cover] base: starting process &quot;cd ecc_cover/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY 15:48:56 [ecc_cover] base: finished (returncode=0)
+SBY 15:48:56 [ecc_cover] prep: starting process &quot;cd ecc_cover/model; yosys -ql design_prep.log design_prep.ys&quot;
+SBY 15:48:56 [ecc_cover] prep: finished (returncode=0)
+SBY 15:48:56 [ecc_cover] smt2: starting process &quot;cd ecc_cover/model; yosys -ql design_smt2.log design_smt2.ys&quot;
+SBY 15:48:56 [ecc_cover] smt2: finished (returncode=0)
+SBY 15:48:56 [ecc_cover] engine_0: starting process &quot;cd ecc_cover; yosys-smtbmc --presat --unroll -c --noprogress -t 15  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2&quot;
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Solver: yices
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 9..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Checking cover reachability in step 10..
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Reached cover statement at ecc_formal.v:105.13-105.37 ($cover$ecc_formal.v:105$99) in step 10.
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 15:48:57 [ecc_cover] engine_0: ##   0:00:00  Status: passed
+SBY 15:48:57 [ecc_cover] engine_0: finished (returncode=0)
+SBY 15:48:57 [ecc_cover] engine_0: Status returned by engine: pass
+SBY 15:48:57 [ecc_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:03 (3)
+SBY 15:48:57 [ecc_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:12 (12)
+SBY 15:48:57 [ecc_cover] summary: engine_0 (smtbmc) returned pass
+SBY 15:48:57 [ecc_cover] summary: cover trace: ecc_cover/engine_0/trace0.vcd
+SBY 15:48:57 [ecc_cover] summary:   reached cover statement ecc_formal.$cover$ecc_formal.v:105$99 at ecc_formal.v:105.13-105.37 in step 10
+SBY 15:48:57 [ecc_cover] DONE (PASS, rc=0)
+</system-out>
+<system-err>
+</system-err>
+</testsuite>
+</testsuites>

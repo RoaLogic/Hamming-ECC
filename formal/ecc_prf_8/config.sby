@@ -1,0 +1,22 @@
+[options]
+mode prove
+depth 1
+multiclock on
+
+[engines]
+smtbmc
+
+[script]
+read -formal ecc_formal.v
+read -formal ecc_enc.sv
+read -formal ecc_dec.sv
+
+hierarchy -top ecc_formal -chparam K 8
+
+
+prep -top ecc_formal
+
+[files]
+./ecc_formal.v
+../rtl/verilog/ecc_enc.sv
+../rtl/verilog/ecc_dec.sv

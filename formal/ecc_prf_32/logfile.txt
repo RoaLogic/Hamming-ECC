@@ -1,0 +1,24 @@
+SBY 15:48:53 [ecc_prf_8] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_8'.
+SBY 15:48:53 [ecc_prf_16] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_16'.
+SBY 15:48:53 [ecc_prf_32] Removing directory '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_32'.
+SBY 15:48:53 [ecc_prf_32] Copy '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_formal.v' to '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_32/src/ecc_formal.v'.
+SBY 15:48:53 [ecc_prf_32] Copy '/home/ajacobo/Videos/Hamming-ECC/rtl/verilog/ecc_enc.sv' to '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_32/src/ecc_enc.sv'.
+SBY 15:48:53 [ecc_prf_32] Copy '/home/ajacobo/Videos/Hamming-ECC/rtl/verilog/ecc_dec.sv' to '/home/ajacobo/Videos/Hamming-ECC/formal/ecc_prf_32/src/ecc_dec.sv'.
+SBY 15:48:53 [ecc_prf_32] engine_0: smtbmc
+SBY 15:48:53 [ecc_prf_32] base: starting process "cd ecc_prf_32/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 15:48:54 [ecc_prf_32] base: finished (returncode=0)
+SBY 15:48:54 [ecc_prf_32] prep: starting process "cd ecc_prf_32/model; yosys -ql design_prep.log design_prep.ys"
+SBY 15:48:54 [ecc_prf_32] prep: finished (returncode=0)
+SBY 15:48:54 [ecc_prf_32] smt2: starting process "cd ecc_prf_32/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 15:48:54 [ecc_prf_32] smt2: finished (returncode=0)
+SBY 15:48:54 [ecc_prf_32] engine_0.basecase: starting process "cd ecc_prf_32; yosys-smtbmc --presat --unroll --noprogress -t 1  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 15:48:54 [ecc_prf_32] engine_0.basecase: ##   0:00:00  Solver: yices
+SBY 15:48:54 [ecc_prf_32] engine_0.induction: starting process "cd ecc_prf_32; yosys-smtbmc --presat --unroll -i --noprogress -t 1  --append 0 --dump-vcd engine_0/trace_induct.vcd --dump-yw engine_0/trace_induct.yw --dump-vlogtb engine_0/trace_induct_tb.v --dump-smtc engine_0/trace_induct.smtc model/design_smt2.smt2"
+SBY 15:48:54 [ecc_prf_32] engine_0.basecase: ##   0:00:00  Checking assumptions in step 0..
+SBY 15:48:54 [ecc_prf_32] engine_0.basecase: ##   0:00:00  Checking assertions in step 0..
+SBY 15:48:54 [ecc_prf_32] engine_0.induction: ##   0:00:00  Solver: yices
+SBY 15:48:54 [ecc_prf_32] engine_0.induction: ##   0:00:00  Trying induction in step 1..
+SBY 15:48:56 [ecc_prf_32] engine_0.basecase: ##   0:00:01  Status: passed
+SBY 15:48:56 [ecc_prf_32] engine_0.basecase: finished (returncode=0)
+SBY 15:48:56 [ecc_prf_32] engine_0.basecase: Status returned by engine for basecase: pass
+SBY 15:49:07 [ecc_prf_32] engine_0.induction: terminating process

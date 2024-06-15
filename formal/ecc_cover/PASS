@@ -1,0 +1,5 @@
+Elapsed clock time [H:MM:SS (secs)]: 0:00:03 (3)
+Elapsed process time [H:MM:SS (secs)]: 0:00:12 (12)
+engine_0 (smtbmc) returned pass
+cover trace: engine_0/trace0.vcd
+  reached cover statement ecc_formal.$cover$ecc_formal.v:105$99 at ecc_formal.v:105.13-105.37 in step 10

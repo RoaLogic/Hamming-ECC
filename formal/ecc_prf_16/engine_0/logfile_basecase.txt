@@ -1,0 +1,4 @@
+##   0:00:00  Solver: yices
+##   0:00:00  Checking assumptions in step 0..
+##   0:00:00  Checking assertions in step 0..
+##   0:00:04  Status: passed
