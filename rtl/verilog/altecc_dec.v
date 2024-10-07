@@ -120,6 +120,9 @@ begin
 end
 endfunction //calculate_m
 
+function is_power_of_2(input int n);
+    is_power_of_2 = (n & (n-1)) == 0;
+endfunction
 
 function [n:1] gen_codeword;
   input [K-1:0] ibv;
@@ -136,7 +139,7 @@ begin
     j=0; //information vector bit index
     for (i=1; i<= n; i=i+1)
     begin
-        if (2**$clog2(i-1) != i)
+        if (!is_power_of_2(i))
         begin
             gen_codeword[i] = ibv[j];
             j = j+1;
