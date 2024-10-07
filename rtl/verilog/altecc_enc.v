@@ -70,7 +70,7 @@
 
 module altecc_enc (
     d_i,              //information bit vector input
-    q_o,              //encoded data word output
+    q_o               //encoded data word output
 );
 
 //---------------------------------------------------------
