@@ -121,12 +121,14 @@ wire       p0;
 //---------------------------------------------------------
 // Module Body
 //---------------------------------------------------------
+/*verilator lint_off PINCONNECTEMPTY*/
 ecc_enc #(K) ecc_enc_inst (
   .d_i  (d_i ),
   .q_o  ( ),
   .p_o  ( p  ),
   .p0_o ( p0 )
 );
+/*verilator lint_on PINCONNECTEMPTY*/
 
 assign q_o = {p0,p,d_i};
 
