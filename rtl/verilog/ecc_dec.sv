@@ -240,7 +240,7 @@ assign syndrome = calculate_syndrome(d);
 //Step 4: Generate intermediate registers (if any)
 generate
   if (LATENCY > 1)
-  begin
+  begin : gen_regi
       always @(posedge clk_i or negedge rst_ni)
         if (!rst_ni)
         begin
@@ -256,7 +256,7 @@ generate
         end
   end
   else
-  begin
+  begin : gen_noregi
       assign d_reg        = d;
       assign parity_reg   = parity;
       assign syndrome_reg = syndrome;
@@ -277,7 +277,7 @@ assign sb_fix =  parity_reg & |information_error(syndrome_reg);
 //Step 8: Generate output registers (if required)
 generate
   if (LATENCY > 0) //
-  begin //Generate output registers
+  begin : gen_rego //Generate output registers
       always @(posedge clk_i or negedge rst_ni)
         if (!rst_ni)
         begin
@@ -297,7 +297,7 @@ generate
         end
   end
   else
-  begin //No output registers
+  begin : gen_norego //No output registers
       always_comb
       begin
           q_o        = q;
