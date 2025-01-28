@@ -127,6 +127,7 @@ module ecc_dec #(
 //---------------------------------------------------------
 // Functions
 //---------------------------------------------------------
+/*verilator lint_off VARHIDDEN*/
 function integer calculate_m(input integer k);
   integer m;
 begin
@@ -136,6 +137,7 @@ begin
   calculate_m = m;
 end
 endfunction //calculate_m
+/*verilator lint_on VARHIDDEN*/
 
 
 function [m:1] calculate_syndrome(input [n:0] cw);
@@ -182,8 +184,8 @@ end
 endfunction //extract_q
 
 
-function is_power_of_2(input int n);
-    is_power_of_2 = (n & (n-1)) == 0;
+function is_power_of_2(input int arg);
+    is_power_of_2 = (arg & (arg-1)) == 0;
 endfunction
 
 

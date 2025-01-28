@@ -113,6 +113,7 @@ module ecc_enc #(
 //---------------------------------------------------------
 // Functions
 //---------------------------------------------------------
+/*verilator lint_off VARHIDDEN*/
 function integer calculate_m;
   input integer k;
 
@@ -124,6 +125,7 @@ begin
   calculate_m = m;
 end
 endfunction //calculate_m
+/*verilator lint_on VARHIDDEN*/
 
 
 function [n:1] store_dbits_in_codeword;

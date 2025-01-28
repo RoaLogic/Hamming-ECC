@@ -91,6 +91,7 @@ localparam n = m + K;
 //---------------------------------------------------------
 // Functions
 //---------------------------------------------------------
+/*verilator lint_off VARHIDDEN*/
 function integer calculate_m;
   input integer k;
 
@@ -102,7 +103,7 @@ begin
   calculate_m = m;
 end
 endfunction //calculate_m
-
+/*verilator lint_on VARHIDDEN*/
 
 //---------------------------------------------------------
 // Inputs & Outputs

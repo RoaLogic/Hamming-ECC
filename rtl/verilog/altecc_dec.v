@@ -108,6 +108,7 @@ output         sb_fix_o;
 //---------------------------------------------------------
 // Functions
 //---------------------------------------------------------
+/*verilator lint_off VARHIDDEN*/
 function integer calculate_m;
   input integer k;
 
@@ -119,9 +120,10 @@ begin
   calculate_m = m;
 end
 endfunction //calculate_m
+/*verilator lint_on VARHIDDEN*/
 
-function is_power_of_2(input int n);
-    is_power_of_2 = (n & (n-1)) == 0;
+function is_power_of_2(input int arg);
+    is_power_of_2 = (arg & (arg-1)) == 0;
 endfunction
 
 function [n:1] gen_codeword;
